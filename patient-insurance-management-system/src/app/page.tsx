@@ -1,6 +1,11 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+let createContext;
+if (typeof window !== 'undefined') {
+  createContext = require('react').createContext;
+}
+
 const Page = () => {
   return (
     <div className="landing-page">
