@@ -73,7 +73,7 @@ const Search = () => {
 
         const placesService = new google.maps.places.PlacesService(map);
         placesService.nearbySearch(request, (results, status) => {
-          if (status === google.maps.places.PlacesServiceStatus.OK) {
+          if (status === google.maps.places.PlacesServiceStatus.OK && results) {
             // Clear existing markers
             markers.forEach(marker => marker.setMap(null));
 
@@ -122,7 +122,6 @@ const Search = () => {
   };
   
   return (
-    
     <div style={{ textAlign: 'center' }}>
         <Header />
       <button
@@ -146,3 +145,19 @@ const Search = () => {
 };
 
 export default Search;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
