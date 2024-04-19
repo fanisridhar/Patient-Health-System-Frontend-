@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Header1 from "../components/NavBard";
 import { Typography, List, ListItem, ListItemText, Button, Paper, TextField, MenuItem } from '@material-ui/core';
 import axios from 'axios';
-
+import Header1 from '@/components/NavBard';
 interface Appointment {
   id: number;
   patientName: string;
@@ -29,14 +28,14 @@ const DoctorDashboard: React.FC = () => {
     {
       id: 1,
       patientName: 'Sridhar Reddy',
-      appointmentTime: '2024-04-07 10:00 AM',
+      appointmentTime: '2024-04-18 14:00 ',
       reason: 'Checkup',
       status: 'pending'
     },
     {
       id: 2,
       patientName: 'Virat Kohli',
-      appointmentTime: '2024-04-06 02:00 PM',
+      appointmentTime: '2024-04-18 10:00 ',
       reason: 'Follow-up',
       status: 'pending'
     }
@@ -47,14 +46,9 @@ const DoctorDashboard: React.FC = () => {
       id: 1,
       senderName: 'Patient Sridhar',
       recipientName: 'Sridhar Reddy',
-      message: 'Hi doctor I had a fever, suggest medication?'
+      message: 'Doctor, please give medications.'
     },
-    {
-      id: 2,
-      senderName: 'Patient Virat',
-      recipientName: 'Virat Kohli',
-      message: 'I have some questions about my medication.'
-    }
+   
   ]);
 
   const [doctor] = useState<Doctor>({
@@ -75,38 +69,37 @@ const DoctorDashboard: React.FC = () => {
     );
   };
 
-  const handleSendMessage = () => {
-    if (responseMessage.trim() !== '' && recipient.trim() !== '') {
+  const handleSendMessage = async (message: string) => {
+    if (message.trim() !== '') {
       const newMessage: Message = {
         id: messages.length + 1,
         senderName: doctor.name,
         recipientName: recipient,
-        message: responseMessage.trim()
+        message: message.trim()
       };
       setMessages(prevMessages => [...prevMessages, newMessage]);
       setResponseMessage('');
     }
   };
 
+  useEffect(() => {
+    const fetchMessages = async () => {
+      try {
+        const response = await axios.get('/api/messages');
+        setMessages(response.data);
+      } catch (error) {
+        console.error('Error fetching messages:', error);
+      }
+    };
 
-useEffect(() => {
-  const fetchMessages = async () => {
-    try {
-      const response = await axios.get('/api/messages');
-      setMessages(response.data);
-    } catch (error) {
-      console.error('Error fetching messages:', error);
-    }
-  };
-
-  fetchMessages();
-}, []);
-
+    fetchMessages();
+  }, []);
 
   return (
     <main>
-      <Header1 />
+       <Header1 />
       <div>
+
         <Typography variant="h4">Welcome, Dr. {doctor.name}</Typography>
 
         <Typography variant="h5">Upcoming Appointments</Typography>
@@ -158,7 +151,7 @@ useEffect(() => {
           onChange={(e) => setResponseMessage(e.target.value)}
           style={{ marginBottom: '1rem' }}
         />
-        <Button variant="contained" color="primary" onClick={handleSendMessage}>Send</Button>
+        <Button variant="contained" color="primary" onClick={() => handleSendMessage(responseMessage)}>Send</Button>
       </div>
     </main>
   );
