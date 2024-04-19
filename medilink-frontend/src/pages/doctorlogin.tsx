@@ -10,7 +10,7 @@ const DoctorLogin: React.FC = () => {
   const handleLogin = () => {
     console.log('Doctor login with username:', username, 'and password:', password);
     // Add your login logic here for patients
-    router.push('/duo');
+    router.push('/duod');
   };
 
   return (
@@ -25,7 +25,7 @@ const DoctorLogin: React.FC = () => {
               <h2 className="text-2xl font-semibold mb-4 text-blue-800">Doctor Login</h2>
               <input
                 type="text"
-                placeholder="Username"
+                placeholder="License ID"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 className="w-full mb-4 px-3 py-2 border rounded-md focus:outline-none focus:border-blue-500"
