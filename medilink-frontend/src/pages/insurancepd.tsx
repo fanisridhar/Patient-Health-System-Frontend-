@@ -1,10 +1,11 @@
 import React from 'react';
-
+import Header2 from '@/components/Navbari';
 const PatientDetailsPage = () => {
   const patients = getDetails();
 
   return (
     <div style={styles.container}>
+    <Header2/ >
       <h1 style={styles.pageTitle}>Patient Details</h1>
       {patients.map((patient, index) => (
         <div key={index} style={styles.patientContainer}>
