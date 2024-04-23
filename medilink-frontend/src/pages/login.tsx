@@ -11,7 +11,7 @@ const Login: React.FC = () => {
           </h1>
           <div className="mt-8 max-w-md w-full">
             <div className="text-center mb-4">
-              <h2 className="text-xl font-semibold mb-4 text-blue-800">Login As:</h2>
+              <h2 className="text-xl font-semibold mb-4 text-blue-800">I am a:</h2>
               <div className="flex justify-between">
                 <Link href="/patientlogin">
                   <button className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded mr-2">
